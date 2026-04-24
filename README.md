@@ -38,9 +38,11 @@ Android phone
 
 ## Quick start
 
-Install Termux from F-Droid or the official GitHub release, then copy this repo to the phone and run:
+Install Termux from F-Droid or the official GitHub release, then clone this repo to the phone:
 
 ```bash
+git clone https://github.com/fbratten/android-termux-home-server.git
+cd android-termux-home-server
 bash scripts/install_or_rebuild.sh
 ```
 
@@ -73,11 +75,24 @@ This is a LAN-oriented utility node, not an internet-facing server.
 ## Repository layout
 
 ```text
-app/        FastAPI app and Python service scripts
-actions/    Whitelisted shell actions
-scripts/    Install, rebuild, and diagnostics scripts
-clients/    Windows PowerShell client scripts
-docs/       Project documentation
+app/             FastAPI app and Python service scripts
+app/actions/     Whitelisted shell actions used by the FastAPI action runner
+scripts/         Install, rebuild, and diagnostics scripts
+clients/         Windows PowerShell client scripts
+docs/            Project documentation
+```
+
+## Important runtime files
+
+These are generated on the Android device and should not be committed:
+
+```text
+app/.action_token
+app/.venv/
+app/logs/
+app/status.json
+app/collector.log
+app/backups/
 ```
 
 ## Status
