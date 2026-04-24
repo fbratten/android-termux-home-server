@@ -73,6 +73,7 @@ http://PHONE_IP:8080/dashboard
 | `docs/VALIDATION.md` | Manual validation checklist before public release |
 | `docs/ANDROID_SETUP.md` | Termux, Termux:API, Termux:Boot, battery, and background reliability notes |
 | `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
+| `docs/RELEASE_DECISION.md` | Current release gate and public/private decision note |
 
 ## Security model
 
@@ -108,6 +109,6 @@ app/collector.log
 app/backups/
 ```
 
-## Status
+## Release state
 
-MVP scaffold. Intended for iterative hardening and practical home-lab use.
+Private until validated on a real Android device. See `docs/RELEASE_DECISION.md`.
