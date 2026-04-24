@@ -176,6 +176,57 @@ Required flow:
 
 ---
 
+## 🔁 Multi-agent contribution example
+
+### Scenario: Validation failure in `/actions`
+
+```text
+Agent 1 (Validation Agent)
+→ Runs: bash scripts/validate_local.sh
+→ Finds failure: actions endpoint rejects valid token
+→ Creates issue: "Validation failure: actions auth"
+→ Stops
+```
+
+```text
+Agent 2 (Runtime Agent)
+→ Reads issue
+→ Clarify: token validation bug
+→ Scope: app/main.py
+→ Plan: inspect token parsing
+→ Execute: minimal fix
+→ Verify: runs validation script
+→ Result: PASS
+→ Creates PR
+```
+
+```text
+Agent 3 (Validation Agent)
+→ Pulls changes
+→ Runs validation again
+→ Confirms failure resolved
+→ Updates issue
+```
+
+```text
+Agent 4 (Release Gate Agent)
+→ Reviews validation status
+→ Updates docs/RELEASE_DECISION.md
+→ Keeps repo private until all checks pass
+```
+
+### Key rules demonstrated
+
+```text
+✔ One agent per role
+✔ One issue per problem
+✔ No parallel edits on same file
+✔ Validation required after fix
+✔ No feature expansion
+```
+
+---
+
 ## Good contributions (now)
 
 - Fix installer edge cases
@@ -212,4 +263,7 @@ Do not expand the system
 
 Do not improvise execution
 → follow 5PP
+
+Agents collaborate
+→ through issues, roles, and validation
 ```
