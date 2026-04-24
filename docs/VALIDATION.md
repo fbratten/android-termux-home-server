@@ -2,6 +2,17 @@
 
 Use this checklist after cloning the repository to a non-rooted Android phone running Termux.
 
+## Validation rule
+
+Manual validation and automated validation both matter.
+
+```text
+docs/VALIDATION.md       → manual source of truth
+scripts/validate_local.sh → local automated validation runner
+```
+
+A release candidate should pass both unless a failing item has been converted into a tracked follow-up issue.
+
 ## 1. Preflight
 
 - [ ] Termux is installed from F-Droid or official GitHub release.
@@ -105,7 +116,28 @@ Expected:
 - [ ] `/events` returns the received validation event.
 - [ ] Dashboard shows recent event after refresh.
 
-## 7. LAN checks from another machine
+## 7. Automated local validation runner
+
+Run this after the installer and services are up:
+
+```bash
+bash scripts/validate_local.sh
+```
+
+Expected:
+
+- [ ] Script exits with status code `0`.
+- [ ] Commands are available: `curl`, `sv`, `python`.
+- [ ] Required files and directories exist.
+- [ ] Required services are running.
+- [ ] Open endpoints respond.
+- [ ] Token-protected action route accepts valid token.
+- [ ] Missing-token action route is rejected.
+- [ ] Non-whitelisted action is rejected.
+- [ ] Webhook round-trip succeeds.
+- [ ] `termux-battery-status` works.
+
+## 8. LAN checks from another machine
 
 Replace `PHONE_IP` with the phone LAN IP.
 
@@ -120,7 +152,7 @@ Expected:
 - [ ] Another LAN device can reach `/info`.
 - [ ] Router DHCP reservation keeps the phone IP stable.
 
-## 8. Windows PowerShell client checks
+## 9. Windows PowerShell client checks
 
 On Windows, save the token locally:
 
@@ -144,7 +176,7 @@ Expected:
 - [ ] Actions list succeeds.
 - [ ] Heartbeat action succeeds.
 
-## 9. Diagnostics
+## 10. Diagnostics
 
 ```bash
 bash scripts/diagnose.sh
@@ -157,7 +189,7 @@ Expected:
 - [ ] Required endpoints pass.
 - [ ] Missing event log before first webhook is treated as informational.
 
-## 10. Safety checks before making public
+## 11. Safety checks before making public
 
 - [ ] Confirm repo contains no `.action_token`.
 - [ ] Confirm repo contains no `app/logs/`.
