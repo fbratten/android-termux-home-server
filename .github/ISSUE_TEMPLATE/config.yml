@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Agent Contribution Guide
+    url: https://github.com/fbratten/android-termux-home-server/blob/main/AGENTS.md
+    about: Read this before contributing as an agent
