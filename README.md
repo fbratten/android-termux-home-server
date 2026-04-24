@@ -62,12 +62,22 @@ Open from another device on the same LAN:
 http://PHONE_IP:8080/dashboard
 ```
 
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| `docs/PROJECT.md` | Project map, endpoints, services, and safety model |
+| `docs/VALIDATION.md` | Manual validation checklist before public release |
+| `docs/ANDROID_SETUP.md` | Termux, Termux:API, Termux:Boot, battery, and background reliability notes |
+| `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
+
 ## Security model
 
 This is a LAN-oriented utility node, not an internet-facing server.
 
 - Keep it behind your router/firewall.
 - Do not expose port `8080` directly to the internet.
+- Do not expose port `8022` directly to the internet.
 - Do not commit `.action_token`.
 - Only predefined scripts in the action whitelist can run.
 - Runtime logs, status files, backups, and virtual environments are ignored by Git.
