@@ -1,0 +1,44 @@
+# Labeler rules for pull requests.
+# Used by actions/labeler to classify PRs by changed paths.
+
+role:runtime:
+  - changed-files:
+      - any-glob-to-any-file:
+          - app/**
+
+role:installer:
+  - changed-files:
+      - any-glob-to-any-file:
+          - scripts/install_or_rebuild.sh
+          - scripts/diagnose.sh
+          - scripts/validate_local.sh
+
+role:docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - docs/**
+          - CONTRIBUTING.md
+          - AGENTS.md
+          - AUTHORS.md
+
+role:release-gate:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/RELEASE_DECISION.md
+          - docs/ROADMAP.md
+
+validation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/VALIDATION.md
+          - scripts/validate_local.sh
+          - .github/ISSUE_TEMPLATE/validation-failure.md
+
+hardening:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/ANDROID_SETUP.md
+          - docs/NETWORKING.md
+          - docs/MULTI_AGENT_ORCHESTRATION.md
+          - scripts/**
