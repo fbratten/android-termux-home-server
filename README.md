@@ -80,6 +80,7 @@ http://PHONE_IP:8080/dashboard
 | `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
 | `docs/RELEASE_DECISION.md` | Current release gate and public/private decision note |
 | `docs/ROADMAP.md` | Atomic project roadmap and future route boundaries |
+| `CONTRIBUTING.md` | Pre-public contribution rules and workflow |
 
 ## Security model
 
