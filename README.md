@@ -74,6 +74,7 @@ http://PHONE_IP:8080/dashboard
 | `docs/ANDROID_SETUP.md` | Termux, Termux:API, Termux:Boot, battery, and background reliability notes |
 | `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
 | `docs/RELEASE_DECISION.md` | Current release gate and public/private decision note |
+| `docs/ROADMAP.md` | Atomic project roadmap and future route boundaries |
 
 ## Security model
 
