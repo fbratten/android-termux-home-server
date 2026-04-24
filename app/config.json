@@ -1,0 +1,8 @@
+{
+  "node_name": "android-termux-home-server",
+  "host": "0.0.0.0",
+  "port": 8080,
+  "collector_interval_seconds": 300,
+  "watchdog_interval_seconds": 60,
+  "max_events_returned": 50
+}
