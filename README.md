@@ -1,5 +1,10 @@
 # Android Termux Home Server
 
+![Status](https://img.shields.io/badge/status-MVP--private-yellow)
+![Platform](https://img.shields.io/badge/platform-Android%20%2B%20Termux-blue)
+![Security](https://img.shields.io/badge/model-LAN--only-green)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+
 Turn an old non-rooted Android phone into a lightweight LAN-only home server using Termux, FastAPI, SSH, scheduled status collection, a watchdog, token-protected actions, and a local webhook inbox.
 
 ## Current MVP
