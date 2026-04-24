@@ -1,0 +1,112 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Triage issue with repository rules
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const text = `${issue.title}\n\n${issue.body || ''}`.toLowerCase();
+
+            const labels = new Set(['needs-triage']);
+            let role = 'role:validation';
+            let priority = 1;
+            const reasons = [];
+
+            function hasAny(words) {
+              return words.some((word) => text.includes(word));
+            }
+
+            if (hasAny(['validate', 'validation', 'validate_local', 'health', 'status endpoint', 'webhook', 'events'])) {
+              labels.add('validation');
+              labels.add('role:validation');
+              role = 'role:validation';
+              priority += 2;
+              reasons.push('Validation-related wording detected.');
+            }
+
+            if (hasAny(['main.py', 'fastapi', 'uvicorn', 'endpoint', 'action runner', 'token', 'webhook', 'dashboard'])) {
+              labels.add('role:runtime');
+              role = 'role:runtime';
+              priority += 2;
+              reasons.push('Runtime/API-related wording detected.');
+            }
+
+            if (hasAny(['install', 'installer', 'termux', 'termux:api', 'termux:boot', 'runit', 'sv ', 'service', 'sshd'])) {
+              labels.add('role:installer');
+              role = 'role:installer';
+              priority += 2;
+              reasons.push('Installer/Termux/service-related wording detected.');
+            }
+
+            if (hasAny(['readme', 'docs', 'documentation', 'clarify', 'typo', 'architecture', 'roadmap'])) {
+              labels.add('role:docs');
+              labels.add('documentation');
+              role = 'role:docs';
+              priority += 1;
+              reasons.push('Documentation-related wording detected.');
+            }
+
+            if (hasAny(['release', 'public', 'private', 'release decision', 'publish'])) {
+              labels.add('role:release-gate');
+              labels.add('release-gate');
+              role = 'role:release-gate';
+              priority += 2;
+              reasons.push('Release-gate wording detected.');
+            }
+
+            if (hasAny(['fail', 'failed', 'failure', 'error', 'broken', 'regression'])) {
+              labels.add('bug');
+              priority += 2;
+              reasons.push('Failure/bug wording detected.');
+            }
+
+            if (hasAny(['security', 'token', 'secret', 'wan', 'internet', 'expose', 'command execution'])) {
+              labels.add('hardening');
+              priority += 3;
+              reasons.push('Security or hardening wording detected.');
+            }
+
+            const priorityLabel = priority >= 7 ? 'priority:high' : priority >= 4 ? 'priority:medium' : 'priority:low';
+            labels.add(priorityLabel);
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              labels: Array.from(labels),
+            });
+
+            const body = [
+              '## Automated issue triage',
+              '',
+              `Suggested role: \`${role}\``,
+              `Validation priority score: \`${priority}\``,
+              `Priority label: \`${priorityLabel}\``,
+              '',
+              'Detected reasons:',
+              ...(reasons.length ? reasons.map((r) => `- ${r}`) : ['- No strong routing keywords detected; keeping `needs-triage`.']),
+              '',
+              'Agent reminder:',
+              '- Follow 5PP: Clarify → Scope → Plan → Execute → Verify.',
+              '- Do not expand scope during Phase 1 validation.',
+              '- Run or reference `bash scripts/validate_local.sh` when behavior changes.',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body,
+            });
