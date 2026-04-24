@@ -18,6 +18,11 @@ This project is intentionally small and realistic:
 - Backup/export action
 - PowerShell client scripts for Windows operators
 
+## Authors
+
+- Fredrik Bratten
+- Nelly, co-worker agent
+
 ## Architecture
 
 ```text
