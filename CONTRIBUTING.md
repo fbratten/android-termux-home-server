@@ -15,7 +15,41 @@ Stability > features
 Validation > expansion
 Safety > convenience
 Atomic > complex
+5PP > ad-hoc execution
 ```
+
+---
+
+## Mandatory protocol: 5PP
+
+All project work MUST follow the **Five-Point Protocol (5PP)**.
+
+Reference:
+
+```text
+https://fbratten.github.io/From-Blueprint-to-Application/demos/five-point-protocol/
+```
+
+Operational form for this repository:
+
+```text
+1. Clarify
+   → Extract and classify the requested change.
+
+2. Scope
+   → Separate independent routes and reject incompatible merges.
+
+3. Plan
+   → Build the dependency path and identify checkpoints.
+
+4. Execute
+   → Make the smallest safe implementation.
+
+5. Verify
+   → Validate constraints, risks, and completeness.
+```
+
+A contribution that skips 5PP is incomplete.
 
 ---
 
@@ -31,13 +65,14 @@ Before making changes:
 Type: core / optional / experimental
 Impact: runtime / installer / docs / security
 Risk: low / medium / high
+5PP phase: Clarify / Scope / Plan / Execute / Verify
 ```
 
 ---
 
 ### 2. No phase skipping
 
-Current phase:
+Current project phase:
 
 ```text
 Phase 1 → Validation (ACTIVE)
@@ -47,6 +82,13 @@ Rules:
 
 ❌ Do NOT add features
 ✅ Only fix, validate, clarify
+
+5PP rule:
+
+```text
+No Execute without Clarify + Scope + Plan.
+No final output without Verify.
+```
 
 ---
 
@@ -58,6 +100,7 @@ Required flow:
 Open issue
 → describe change
 → classify scope
+→ map to 5PP phase
 → wait for approval
 ```
 
@@ -84,6 +127,7 @@ Solve one problem
 Touch minimal files
 Be reversible
 Be explainable
+Pass verification
 ```
 
 ---
@@ -110,6 +154,8 @@ If behavior changes:
 Update docs/VALIDATION.md
 OR
 Add validation step
+OR
+Update scripts/validate_local.sh
 ```
 
 No validation → change is incomplete
@@ -118,13 +164,13 @@ No validation → change is incomplete
 
 ## Agent execution pattern
 
-Recommended flow:
+Required flow:
 
 ```text
 1. Clarify
 2. Scope
-3. Constrain
-4. Implement (minimal)
+3. Plan
+4. Execute (minimal)
 5. Verify against validation
 ```
 
@@ -163,4 +209,7 @@ Contributors in this phase:
 ```text
 Do not expand the system
 → prove the system first
+
+Do not improvise execution
+→ follow 5PP
 ```
