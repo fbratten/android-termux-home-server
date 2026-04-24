@@ -36,6 +36,8 @@ Android phone
     └── whitelisted shell actions
 ```
 
+For a Mermaid diagram and request-flow breakdown, see `docs/ARCHITECTURE.md`.
+
 ## Quick start
 
 Install Termux from F-Droid or the official GitHub release, then clone this repo to the phone:
@@ -67,6 +69,7 @@ http://PHONE_IP:8080/dashboard
 | Document | Purpose |
 |---|---|
 | `docs/PROJECT.md` | Project map, endpoints, services, and safety model |
+| `docs/ARCHITECTURE.md` | Mermaid architecture diagram and request flows |
 | `docs/VALIDATION.md` | Manual validation checklist before public release |
 | `docs/ANDROID_SETUP.md` | Termux, Termux:API, Termux:Boot, battery, and background reliability notes |
 | `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
