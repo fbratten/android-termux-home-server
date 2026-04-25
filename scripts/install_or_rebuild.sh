@@ -9,8 +9,10 @@ printf '%s\n' "[1/8] Updating packages..."
 pkg update -y
 pkg install -y openssh python nano curl termux-services termux-api
 
-printf '%s\n' "[2/8] Creating app folders..."
+printf '%s\n' "[2/8] Creating app folders and executable permissions..."
 mkdir -p "$APP_DIR/actions" "$APP_DIR/logs" "$APP_DIR/backups"
+chmod +x "$APP_DIR"/actions/*.sh 2>/dev/null || true
+chmod +x "$REPO_DIR"/scripts/*.sh 2>/dev/null || true
 
 printf '%s\n' "[3/8] Creating Python venv..."
 cd "$APP_DIR"
@@ -96,3 +98,4 @@ printf '%s\n' '  sv status phone-api'
 printf '%s\n' '  sv status status-collector'
 printf '%s\n' '  sv status phone-watchdog'
 printf '%s\n' '  curl http://127.0.0.1:8080/health'
+printf '%s\n' '  bash scripts/validate_local.sh'
