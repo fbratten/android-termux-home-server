@@ -4,21 +4,21 @@
 
 ```mermaid
 flowchart TD
-    User[LAN User / Operator]
-    Windows[Windows PowerShell Client]
-    Router[Home Router / LAN]
-    Phone[Old Android Phone]
-    Termux[Termux]
-    SSH[sshd :8022]
-    API[FastAPI :8080]
-    Dashboard[/dashboard]
-    Health[/health, /info, /status]
-    Actions[Token-protected Action Runner]
-    Webhook[Token-protected Webhook Inbox]
-    Collector[status-collector service]
-    Watchdog[phone-watchdog service]
-    Files[Runtime Files]
-    Scripts[Whitelisted Shell Scripts]
+    User["LAN User / Operator"]
+    Windows["Windows PowerShell Client"]
+    Router["Home Router / LAN"]
+    Phone["Old Android Phone"]
+    Termux["Termux"]
+    SSH["sshd :8022"]
+    API["FastAPI :8080"]
+    Dashboard["/dashboard"]
+    Health["/health, /info, /status"]
+    Actions["Token-protected Action Runner"]
+    Webhook["Token-protected Webhook Inbox"]
+    Collector["status-collector service"]
+    Watchdog["phone-watchdog service"]
+    Files["Runtime Files"]
+    Scripts["Whitelisted Shell Scripts"]
 
     User --> Router
     Windows --> Router
@@ -100,4 +100,4 @@ LAN client
 - The router does not forward ports `8022` or `8080` to the internet.
 - The phone has a stable DHCP reservation.
 - Android battery optimization is relaxed for Termux and Termux:Boot.
-- The operator validates the setup with `docs/VALIDATION.md` before any public release.
+- The setup is public as a pre-release and should be validated with `docs/VALIDATION.md` before relying on it.
