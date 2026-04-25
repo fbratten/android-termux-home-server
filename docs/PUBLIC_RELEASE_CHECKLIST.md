@@ -4,17 +4,37 @@ Use this checklist before changing the repository from private to public.
 
 ## Release rule
 
-Do not make the repository public until:
+This repository may be made public as an **experimental public pre-release** if the public-facing documentation clearly states that the project is **not fully tested**.
+
+Required public wording:
 
 ```text
-1. docs/VALIDATION.md is completed
-2. scripts/validate_local.sh passes on a real Android device
-3. No secrets/runtime artifacts are present
-4. GitHub repository security settings are reviewed
-5. Release decision is updated
+Not fully tested on real Android hardware yet.
+Experimental MVP / starter kit.
+LAN-only. No internet-facing deployment guidance.
 ```
 
-## 1. Validation gate
+## 1. Public pre-release gate
+
+Before switching public:
+
+- [ ] README states that the project is not fully tested.
+- [ ] README states LAN-only / no internet-facing deployment.
+- [ ] README badge/status reflects public pre-release or experimental state.
+- [ ] `docs/RELEASE_DECISION.md` says public pre-release is approved with limitations.
+- [ ] `docs/PUBLIC_RELEASE_CHECKLIST.md` exists.
+- [ ] `scripts/validate_local.sh` is a full validation runner, not a placeholder.
+- [ ] No `.action_token` is committed.
+- [ ] No logs, backups, or runtime status files are committed.
+- [ ] No secrets, SSH keys, API keys, or `.env` files are committed.
+- [ ] Router/WAN exposure is explicitly discouraged.
+- [ ] GitHub security settings are reviewed or marked pending.
+
+## 2. Recommended validation after public release
+
+The repository can be public before full validation only if it remains clearly marked as not fully tested.
+
+Still recommended:
 
 - [ ] Issue #2 is completed or all failed validation steps have follow-up issues.
 - [ ] `docs/VALIDATION.md` has been executed on a real non-rooted Android device.
@@ -25,7 +45,7 @@ Do not make the repository public until:
 - [ ] Dashboard works from another LAN device.
 - [ ] Windows PowerShell client works, if used for the release claim.
 
-## 2. Repository content safety
+## 3. Repository content safety
 
 Confirm the repository does NOT contain:
 
@@ -50,18 +70,19 @@ git ls-files | grep -E '(\.action_token|\.env|\.venv|logs/|status\.json|collecto
 
 Expected result: no sensitive tracked files.
 
-## 3. Documentation readiness
+## 4. Documentation readiness
 
 - [ ] README clearly states LAN-only model.
 - [ ] README clearly states no internet-facing deployment.
+- [ ] README clearly states not fully tested.
 - [ ] README links to validation, Android setup, networking, release decision, roadmap, and contribution docs.
-- [ ] `docs/RELEASE_DECISION.md` is updated from private-pending-validation to public-ready.
+- [ ] `docs/RELEASE_DECISION.md` is updated for public pre-release.
 - [ ] `docs/ROADMAP.md` reflects actual current phase.
 - [ ] `CONTRIBUTING.md` requires 5PP.
 - [ ] `AGENTS.md` is present and current.
 - [ ] `docs/MULTI_AGENT_ORCHESTRATION.md` is present and current.
 
-## 4. Runtime safety review
+## 5. Runtime safety review
 
 Confirm the code does NOT include:
 
@@ -78,7 +99,7 @@ Confirm the action runner is still whitelist-only:
 - [ ] Unknown actions are rejected.
 - [ ] Token is required for `/actions`, `/webhook`, and `/events`.
 
-## 5. GitHub UI repository settings
+## 6. GitHub UI repository settings
 
 Before switching public, review GitHub UI settings.
 
@@ -106,7 +127,7 @@ Check:
 Suggested description:
 
 ```text
-Turn an old non-rooted Android phone into a lightweight Termux-based LAN home server.
+Experimental starter kit for turning an old non-rooted Android phone into a lightweight Termux-based LAN home server. Not fully tested yet.
 ```
 
 Suggested topics:
@@ -121,9 +142,10 @@ automation
 lan
 python
 powershell
+experimental
 ```
 
-## 6. GitHub security settings
+## 7. GitHub security settings
 
 Go to:
 
@@ -145,7 +167,7 @@ Notes:
 - Availability depends on repository visibility, account plan, and GitHub feature access.
 - If a feature is unavailable, record that in `docs/RELEASE_DECISION.md`.
 
-## 7. Branch protection / rulesets
+## 8. Branch protection / rulesets
 
 Go to:
 
@@ -165,7 +187,7 @@ Minimum for early public MVP:
 
 - [ ] No direct unreviewed changes to `main` once contributors are expected.
 
-## 8. Actions permissions
+## 9. Actions permissions
 
 Go to:
 
@@ -189,7 +211,7 @@ Current workflows:
 
 Both are for labeling/triage, not deployment.
 
-## 9. Labels and issue templates
+## 10. Labels and issue templates
 
 - [ ] Labels exist or are created automatically when first applied.
 - [ ] Role labels are documented in `docs/ISSUE_LABELS.md`.
@@ -198,28 +220,9 @@ Both are for labeling/triage, not deployment.
 - [ ] Agent task template is present.
 - [ ] Validation failure template is present.
 
-## 10. Release decision update
-
-Before switching public, update:
-
-```text
-docs/RELEASE_DECISION.md
-```
-
-Required final state:
-
-```text
-Decision: public release approved
-Date:
-Validation status:
-Known limitations:
-Security settings reviewed:
-Remaining risks:
-```
-
 ## 11. Visibility switch
 
-Only after all gates pass:
+Only after pre-release gates pass:
 
 ```text
 Repository → Settings → General → Danger Zone → Change repository visibility → Public
@@ -246,17 +249,16 @@ First 24–72 hours:
 ## Final go/no-go
 
 ```text
-GO:
-- Validation passed
+GO for public pre-release:
+- README says not fully tested
 - Secrets absent
-- GitHub security settings reviewed
-- Release decision updated
-- Maintainer accepts known limitations
+- LAN-only/no internet exposure clear
+- GitHub security settings reviewed or pending status recorded
+- Release decision says public pre-release approved
 
 NO-GO:
-- Validation not run
 - Runtime token/log/status artifacts present
 - Public exposure ambiguity exists
-- GitHub security settings not reviewed
 - Release decision still says private
+- README implies production-ready status
 ```
