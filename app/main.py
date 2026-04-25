@@ -27,7 +27,7 @@ ACTIONS = {
     "list-logs": "actions/list-logs.sh",
     "trim-logs": "actions/trim-logs.sh",
     "backup": "actions/backup.sh",
-    "diagnose": "scripts/diagnose.sh",
+    "diagnose": "../scripts/diagnose.sh",
 }
 
 
@@ -57,10 +57,11 @@ def get_version() -> str:
     return "unknown"
 
 
-def run_command(command: list[str], timeout: int = 5) -> dict:
+def run_command(command: list[str | Path], timeout: int = 5) -> dict:
     try:
+        normalized_command = [str(item) for item in command]
         result = subprocess.run(
-            command,
+            normalized_command,
             capture_output=True,
             text=True,
             timeout=timeout,
@@ -133,12 +134,12 @@ def run_action(action_name: str) -> dict:
     if action_name not in ACTIONS:
         return {"ok": False, "error": "Action not allowed", "allowed_actions": list(ACTIONS.keys())}
 
-    script_path = BASE_DIR / ACTIONS[action_name]
+    script_path = (BASE_DIR / ACTIONS[action_name]).resolve()
 
     if not script_path.exists():
         return {"ok": False, "error": f"Script missing: {script_path}"}
 
-    result = run_command([str(script_path)], timeout=30)
+    result = run_command([script_path], timeout=30)
     return {
         "ok": result["ok"],
         "action": action_name,
