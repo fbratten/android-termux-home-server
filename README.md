@@ -106,7 +106,7 @@ This repository is also the first real-world case study for the reusable Agent-R
 https://github.com/fbratten/agent-ready-github
 ```
 
-If that guide repository is still private, use this repository's `AGENTS.md`, `CONTRIBUTING.md`, `docs/MULTI_AGENT_ORCHESTRATION.md`, and `docs/ISSUE_LABELS.md` as the local source of truth.
+That guide is public; this repository's `AGENTS.md`, `CONTRIBUTING.md`, `docs/MULTI_AGENT_ORCHESTRATION.md`, and `docs/ISSUE_LABELS.md` remain the local source of truth for this project.
 
 ## Security model
 

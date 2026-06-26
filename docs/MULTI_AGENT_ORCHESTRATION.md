@@ -8,7 +8,7 @@ For the reusable pattern behind this repository's agent-friendly workflow, see:
 https://github.com/fbratten/agent-ready-github
 ```
 
-If that guide repository is still private, this document remains the local source of truth.
+That guide is public; this document remains the local source of truth for this project.
 
 ## Current project phase
 
