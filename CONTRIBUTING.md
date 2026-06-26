@@ -1,10 +1,19 @@
-# Contributing (Pre-Publication + Agent-Friendly)
+# Contributing (Public Pre-Release + Agent-Friendly)
 
-This repository is currently **private** and in **validation phase**.
+This repository is a **public pre-release** and is still in **validation phase**.
 
 This document applies to:
+
 - Human contributors
 - AI / agent contributors (LLMs, copilots, automation)
+
+For the reusable pattern behind this repository's agent-friendly workflow, see:
+
+```text
+https://github.com/fbratten/agent-ready-github
+```
+
+That guide is public; this repository's local docs remain the source of truth for this project.
 
 ---
 
@@ -34,19 +43,19 @@ Operational form for this repository:
 
 ```text
 1. Clarify
-   → Extract and classify the requested change.
+   -> Extract and classify the requested change.
 
 2. Scope
-   → Separate independent routes and reject incompatible merges.
+   -> Separate independent routes and reject incompatible merges.
 
 3. Plan
-   → Build the dependency path and identify checkpoints.
+   -> Build the dependency path and identify checkpoints.
 
 4. Execute
-   → Make the smallest safe implementation.
+   -> Make the smallest safe implementation.
 
 5. Verify
-   → Validate constraints, risks, and completeness.
+   -> Validate constraints, risks, and completeness.
 ```
 
 A contribution that skips 5PP is incomplete.
@@ -75,13 +84,15 @@ Risk: low / medium / high
 Current project phase:
 
 ```text
-Phase 1 → Validation (ACTIVE)
+Phase 1 -> Validation (ACTIVE)
 ```
 
 Rules:
 
-❌ Do NOT add features
-✅ Only fix, validate, clarify
+```text
+Do NOT add features.
+Only fix, validate, clarify.
+```
 
 5PP rule:
 
@@ -98,10 +109,10 @@ Required flow:
 
 ```text
 Open issue
-→ describe change
-→ classify scope
-→ map to 5PP phase
-→ wait for approval
+-> describe change
+-> classify scope
+-> map to 5PP phase
+-> wait for approval
 ```
 
 ---
@@ -137,11 +148,11 @@ Pass verification
 Respect repo layout:
 
 ```text
-app/        → runtime
-app/actions → execution layer
-scripts/    → install/diagnostics
-clients/    → external clients
-docs/       → source of truth
+app/         -> runtime
+app/actions/ -> execution layer
+scripts/     -> install/diagnostics
+clients/     -> external clients
+docs/        -> source of truth
 ```
 
 ---
@@ -158,7 +169,7 @@ OR
 Update scripts/validate_local.sh
 ```
 
-No validation → change is incomplete
+No validation -> change is incomplete.
 
 ---
 
@@ -176,53 +187,53 @@ Required flow:
 
 ---
 
-## 🔁 Multi-agent contribution example
+## Multi-agent contribution example
 
 ### Scenario: Validation failure in `/actions`
 
 ```text
 Agent 1 (Validation Agent)
-→ Runs: bash scripts/validate_local.sh
-→ Finds failure: actions endpoint rejects valid token
-→ Creates issue: "Validation failure: actions auth"
-→ Stops
+-> Runs: bash scripts/validate_local.sh
+-> Finds failure: actions endpoint rejects valid token
+-> Creates issue: "Validation failure: actions auth"
+-> Stops
 ```
 
 ```text
 Agent 2 (Runtime Agent)
-→ Reads issue
-→ Clarify: token validation bug
-→ Scope: app/main.py
-→ Plan: inspect token parsing
-→ Execute: minimal fix
-→ Verify: runs validation script
-→ Result: PASS
-→ Creates PR
+-> Reads issue
+-> Clarify: token validation bug
+-> Scope: app/main.py
+-> Plan: inspect token parsing
+-> Execute: minimal fix
+-> Verify: runs validation script
+-> Result: PASS
+-> Creates PR
 ```
 
 ```text
 Agent 3 (Validation Agent)
-→ Pulls changes
-→ Runs validation again
-→ Confirms failure resolved
-→ Updates issue
+-> Pulls changes
+-> Runs validation again
+-> Confirms failure resolved
+-> Updates issue
 ```
 
 ```text
 Agent 4 (Release Gate Agent)
-→ Reviews validation status
-→ Updates docs/RELEASE_DECISION.md
-→ Keeps repo private until all checks pass
+-> Reviews validation status
+-> Updates docs/RELEASE_DECISION.md
+-> Keeps release claims conservative until checks pass
 ```
 
 ### Key rules demonstrated
 
 ```text
-✔ One agent per role
-✔ One issue per problem
-✔ No parallel edits on same file
-✔ Validation required after fix
-✔ No feature expansion
+One agent per role
+One issue per problem
+No parallel edits on same file
+Validation required after fix
+No feature expansion
 ```
 
 ---
@@ -251,7 +262,9 @@ Agent 4 (Release Gate Agent)
 
 Contributors in this phase:
 
-→ Added to AUTHORS.md after validation completes
+```text
+Added to AUTHORS.md after validation completes.
+```
 
 ---
 
@@ -259,11 +272,11 @@ Contributors in this phase:
 
 ```text
 Do not expand the system
-→ prove the system first
+-> prove the system first
 
 Do not improvise execution
-→ follow 5PP
+-> follow 5PP
 
 Agents collaborate
-→ through issues, roles, and validation
+-> through issues, roles, and validation
 ```

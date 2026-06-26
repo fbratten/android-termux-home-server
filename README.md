@@ -93,8 +93,20 @@ http://PHONE_IP:8080/dashboard
 | `docs/NETWORKING.md` | DHCP reservation, LAN-only safety, ports, and remote-access boundaries |
 | `docs/RELEASE_DECISION.md` | Public pre-release decision note |
 | `docs/ROADMAP.md` | Atomic project roadmap and future route boundaries |
+| `docs/MULTI_AGENT_ORCHESTRATION.md` | Multi-agent roles, collision rules, and handoff format |
+| `docs/ISSUE_LABELS.md` | Issue labels used for human and agent routing |
 | `CONTRIBUTING.md` | Contribution rules and workflow |
 | `AGENTS.md` | Agent interoperability instructions |
+
+## Agent-ready governance
+
+This repository is also the first real-world case study for the reusable Agent-Ready GitHub guide:
+
+```text
+https://github.com/fbratten/agent-ready-github
+```
+
+That guide is public; this repository's `AGENTS.md`, `CONTRIBUTING.md`, `docs/MULTI_AGENT_ORCHESTRATION.md`, and `docs/ISSUE_LABELS.md` remain the local source of truth for this project.
 
 ## Security model
 

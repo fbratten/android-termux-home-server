@@ -2,6 +2,14 @@
 
 This document defines how multiple agents may work on this repository without conflict or scope drift.
 
+For the reusable pattern behind this repository's agent-friendly workflow, see:
+
+```text
+https://github.com/fbratten/agent-ready-github
+```
+
+That guide is public; this document remains the local source of truth for this project.
+
 ## Current project phase
 
 ```text
@@ -19,7 +27,7 @@ Validation only. No feature expansion.
 All agents MUST follow 5PP:
 
 ```text
-Clarify → Scope → Plan → Execute → Verify
+Clarify -> Scope -> Plan -> Execute -> Verify
 ```
 
 Reference:
@@ -121,8 +129,8 @@ Rules:
 
 Purpose:
 
-- Check readiness for public release
-- Maintain release decision status
+- Check readiness for release-state changes
+- Maintain pre-release limitations and public claims
 
 Allowed files:
 
@@ -134,8 +142,9 @@ issues / release notes
 
 Rules:
 
-- Repository stays private until validation passes
+- Keep the repository clearly marked as public pre-release until validation passes
 - Any failed validation item must become a tracked issue
+- Do not expand public claims without validation evidence
 
 ## Collision rules
 
@@ -144,7 +153,7 @@ Agents must not work on the same file at the same time unless explicitly coordin
 Preferred assignment pattern:
 
 ```text
-One agent → one issue → one route → one minimal diff
+One agent -> one issue -> one route -> one minimal diff
 ```
 
 If two agents need the same file:
@@ -176,7 +185,7 @@ Related issue:
 Use issues as the work queue.
 
 ```text
-Issue → assigned role → branch/commit → validation → handoff → close or follow-up
+Issue -> assigned role -> branch/commit -> validation -> handoff -> close or follow-up
 ```
 
 ## Branch naming suggestion
@@ -212,10 +221,10 @@ Best for current phase.
 
 ```text
 Validation Agent
-→ identifies failure
-→ Runtime/Installer Agent fixes one issue
-→ Validation Agent re-runs checks
-→ Release Gate Agent updates status
+-> identifies failure
+-> Runtime/Installer Agent fixes one issue
+-> Validation Agent re-runs checks
+-> Release Gate Agent updates status
 ```
 
 ### Parallel mode
@@ -225,16 +234,16 @@ Allowed only when file ownership does not overlap.
 Example:
 
 ```text
-Validation Agent → runs checklist
-Documentation Agent → clarifies docs
-Installer Agent → fixes installer issue
+Validation Agent -> runs checklist
+Documentation Agent -> clarifies docs
+Installer Agent -> fixes installer issue
 ```
 
 Parallel mode is not allowed for broad refactors.
 
-## Release gate
+## Release-state gate
 
-Before public release:
+Before removing pre-release limitations or expanding public claims:
 
 ```text
 Validation Agent: pass
@@ -246,7 +255,7 @@ Release Gate Agent: approve
 If any role reports failure:
 
 ```text
-Do not publish.
+Do not expand release claims.
 Create follow-up issue.
-Keep repository private.
+Keep the public pre-release limitation visible.
 ```
